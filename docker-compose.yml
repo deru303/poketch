@@ -20,7 +20,7 @@ services:
         ports:
             - "7075:7075"
         depends_on:
-            - db
+            - mysql-server
 
     phpmyadmin:
         image: phpmyadmin
