@@ -1,0 +1,80 @@
+<!-- Bulbapedia modal -->
+<div class="modal fade" id="bulbapedia-modal">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Bulbapedia</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body">
+                <iframe src="">
+                </iframe>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Pokemon image modal -->
+<div class="modal fade" id="pokemon-img-modal">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Bulbasaur</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="https://cdn.bulbagarden.net/upload/thumb/2/21/001Bulbasaur.png/375px-001Bulbasaur.png" alt="Bulbasaur" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Manage pokemon modal -->
+<div class="modal fade" id="pokemon-manage-modal">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Manage Pokemon - <span id="managed-pokemon"></span></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form action="/modify-pokemon/" method="POST" id="pkmn-manage-form" name="pkmn-manage-form">
+                    {% csrf_token %}
+
+                    <input type="hidden" value="http://localhost/poketch/" id="pkmn-redirect-url" name="pkmn-redirect-url" />
+
+                    <input type="hidden" value="" id="pkmn-pkdex-no" name="pkmn-pkdex-no" />
+
+                    <input type="hidden" value="" id="pkmn-update-type" name="pkmn-update-type" />
+
+                    <div class="mb-3">
+                        <label for="pkmn-console-owned" class="col-form-label">Owned (in Pokemon console game)?</label>
+                        <input type="text" class="form-control" id="pkmn-console-owned" name="pkmn-console-owned">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="pkmn-note" class="col-form-label">Note about this Pokemon:</label>
+                        <input type="text" class="form-control" id="pkmn-note" name="pkmn-note">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="pkmn-manage-form" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% load static %}
+<script src="{% static 'poketch_app/js/bulbapedia-links.js' %}"></script>
+<script src="{% static 'poketch_app/js/manage-pokemon.js' %}"></script>
+<script src="{% static 'poketch_app/js/pokemon-images.js' %}"></script>

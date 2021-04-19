@@ -1,0 +1,36 @@
+{% extends 'poketch_app/base.html' %}
+
+{% block title %}Statistics | {% endblock %}
+
+{% block content %}
+    <h2 id="subpage-header">Statistics:</h2>
+    <hr />
+
+    <div id="pokedex-statistics">
+        <h3>Global Pokedex</h3>
+        <hr />
+
+        {% for gen, stats in global_ownership.items %}
+            <div class="stats-section">
+                <h4>Generation {{ gen }}</h4>
+                <div>Total to catch: {{ stats.0 }}</div>
+                <div>Owned: {{ stats.1 }}</div>
+                <div>Missing: {{ stats.2 }}</div>
+                <div>Ownership percentage: {{ stats.3 }}%</div>
+            </div>
+        {% endfor %}
+
+        <h3 style="margin-top: 30px;">Regional Forms</h3>
+        <hr />
+
+        {% for gen, stats in regional_ownership.items %}
+            <div class="stats-section">
+                <h4>Generation {{ gen }}</h4>
+                <div>Total to catch: {{ stats.0 }}</div>
+                <div>Owned: {{ stats.1 }}</div>
+                <div>Missing: {{ stats.2 }}</div>
+                <div>Ownership percentage: {{ stats.3 }}%</div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

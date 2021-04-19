@@ -1,0 +1,72 @@
+{% extends 'poketch_app/base.html' %}
+
+{% block title %}Box Location Utility | {% endblock %}
+
+{% block content %}
+    <h2 id="subpage-header">Box Location Utility:</h2>
+    <hr />
+
+    <form class="row row-cols-lg-auto g-3 align-items-center" id="pokedex-number-form">
+        <div class="col-12">
+            <label class="visually-hidden" for="pokedex-number">Pokedex Number:</label>
+            <div class="input-group">
+                <div class="input-group-text">Pokedex Number:</div>
+                <input type="text" class="form-control" id="pokedex-number" placeholder="(e.g. 150)">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Check</button>
+        </div>
+    </form>
+
+    <h2 style="margin-top: 30px;">
+        Box number <span id="box-number">?</span>
+    </h2>
+
+    <table id="pc-table">
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    {% load static %}
+    <script src="{% static 'poketch_app/js/box-location-util.js' %}"></script>
+{% endblock %}

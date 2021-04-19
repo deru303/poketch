@@ -1,0 +1,50 @@
+{% extends 'poketch_app/base.html' %}
+
+{% block title %}Regional Forms | {% endblock %}
+
+{% block content %}
+    <h2 id="subpage-header">Regional Forms:</h2>
+    <hr />
+
+    {% for gen_number, pokemon in regional_forms.items %}
+        <h3>Generation {{ gen_number }}</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Types</th>
+                    <th>Info link</th>
+                    <th>Caught?</th>
+                    <th>Note</th>
+                    <th>Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pkmn in pokemon %}
+                    <tr id="pokemon-{{ pkmn.form_number }}" class="{% if pkmn.console_owned != '' %}caught{% else %}not-caught{% endif %}">
+                        <td class='pokemon-no'>#{{ pkmn.form_number }}</td>
+                        <td class='pokemon-img'>
+                            <a href='{{ pkmn.image_link }}' target='_blank'>
+                                <img src='{{pkmn.image_link}}' class='pokemon-mini-img' alt='{{ pkmn.name }}' />
+                            </a>
+                        </td>
+                        <td class='pokemon-name'>{{ pkmn.name }}</td>
+                        <td class='pokemon-type'>
+                            {{ pkmn.type1 }}{% if pkmn.type2 != "None" %}, {{ pkmn.type2 }} {% endif %}
+                        </td>
+                        <td class='pokemon-info'><a href='{{ pkmn.article_link }}' class='bulbapedia-link'>(info)</a></td>
+                        <td class='pokemon-console-owned'>{{ pkmn.console_owned }}</td>
+                        <td class='pokemon-owned'>{{ pkmn.note }}</td>
+                        <td class='pokemon-manage'>
+                            <button type='button' class='btn btn-primary btn-sm' data-pokedex-no='{{ pkmn.form_number }}'>Manage</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+
+    {% include "poketch_app/modals.html" %}
+ {% endblock %}
