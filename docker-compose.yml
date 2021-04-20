@@ -1,22 +1,45 @@
 version: '3'
 
 services:
-  db:
-    image: mysql:5.7
-    ports:
-      - '7050:3306'
-    environment:
-       MYSQL_DATABASE: 'poketch_db'
-       MYSQL_USER: 'root'
-       MYSQL_PASSWORD: 'poketch_secret'
-       MYSQL_ROOT_PASSWORD: 'poketch_secret'
+    db:
+        restart: always
+        image: mysql:5.7
+        ports:
+            - '7050:3306'
+        volumes:
+            - poketchdb:/var/lib/mysql
+        environment:
+            MYSQL_DATABASE: 'poketch_db'
+            MYSQL_ROOT_PASSWORD: 'poketch_secret'
+        healthcheck:
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            timeout: 20s
+            retries: 10
 
-  web:
-    build: .
-    command: python manage.py runserver 0.0.0.0:8000
-    volumes:
-      - .:/opt/poketch
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
+    phpmyadmin:
+        restart: always
+        image: phpmyadmin
+        environment:
+            PMA_HOST: db
+            PMA_USER: root
+            PMA_PASSWORD: poketch_secret
+        ports:
+            - "5050:80"
+        depends_on:
+            db:
+                condition: service_healthy
+
+    web:
+        restart: always
+        build: .
+        command: python manage.py runserver 0.0.0.0:6050
+        volumes:
+            - .:/opt/poketch
+        ports:
+            - "6050:6050"
+        depends_on:
+            db:
+                condition: service_healthy
+
+volumes:
+    poketchdb: {}

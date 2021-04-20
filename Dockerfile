@@ -3,5 +3,5 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /opt/poketch
 WORKDIR /opt/poketch
 ADD requirements.txt /opt/poketch
-RUN pip install — upgrade pip && pip install -r requirements.txt
+RUN pip install -r requirements.txt
 ADD . /opt/poketch
