@@ -78,8 +78,8 @@ WSGI_APPLICATION = 'poketch.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_poketch',
-        'HOST': 'mysql-server',
+        'NAME': 'poketch_db',
+        'HOST': 'db',
         'PORT': '3306',
         'USER': 'root',
         'PASSWORD': 'poketch_secret',
